@@ -241,3 +241,9 @@ h2{
     background-color: rgba(40,40,40,1);
     color: white;
 }
+
+@media screen and (max-width: 900px) {
+    .startbox {
+        width: 97%;
+    }
+}
