@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Kontakt</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
+   <!-- <link rel="stylesheet" type="text/css" href="css/space.css" title="space" media="screen" />
+    <script type="text/javascript" src="js/websocket.js"></script> -->
+    
+    <script language="javascript" type="text/javascript" src="js/vuedev.js"></script>
+</head>
+<body>
+    <header>
+    </header>
+    <main>
+        <div id ="app">
+            <div v-on:click="goBack" class="zurueckKnopf ganzelement" v-if="page != 'start'" v-bind:class="page">
+                ← Zurück
+            </div>
+            <div v-if="error != ''" class="errorDiv" v-bind:class="page">
+                <div class="errorDivTitle">
+                    Fehler
+                </div>
+                <div class="errorDivContent">
+                    {{ error }}
+                </div>
+            </div>
+            <div v-if="info != ''" class="infoDiv" v-bind:class="page">
+                <div class="infoDivTitle">
+                    Hinweis
+                </div>
+                <div class="infoDivContent">
+                    <p class="loginErrorP">{{ info }}</p>
+                </div>
+            </div>
+            <div class="start mainDiv" v-if="page == 'start'">
+                <div class="startbox input">
+                    <h2>Kontakt eingeben</h2>
+                    <input v-model="contactInput" type="text" class="ganzelement inputElement">
+                        
+                    </input>
+                    <div v-on:click="checkContact" class="ganzelement inputElement button">
+                        Absenden
+                    </div>
+                </div>
+                <div class="startbox output">
+                    <h2> Kontakt </h2>
+                    <div class="halbelement output">
+                        Anrede
+                    </div>
+                    <input v-model="contact.address" type="text" class="halbelement output">
+                    <div class="halbelement output">
+                        Standardisierte Briefanrede
+                    </div>
+                    <input v-model="contact.salutation" type="text" class="halbelement output">
+                    <div class="halbelement output">
+                        Titel
+                    </div>
+                    <input v-model="contact.title" type="text" class="halbelement output">
+                    <div class="halbelement output">
+                        Geschlecht
+                    </div>
+                    <input v-model="contact.gender" type="text" class="halbelement output">
+                    <div class="halbelement output">
+                        Vorname
+                    </div>
+                    <input v-model="contact.firstName" type="text" class="halbelement output">
+                    <div class="halbelement output">
+                        Nachname
+                    </div>
+                    <input v-model="contact.lastName" type="text" class="halbelement output">
+
+                    <div v-on:click="discardChanges" class="halbelement output button">
+                        {{ savePhrase[1] }}
+                    </div>
+                    <div v-on:click="applyChanges" class="halbelement output button">
+                        {{ savePhrase[0] }}
+                    </div>
+                </div>
+                <div v-if="allContacts.length > 0" class="allContacts">
+                    <h2>Kontaktliste</h2>
+                    <table class="allContactsTable">
+                        <tr>
+                            <th>
+                                Anrede
+                            </th>
+                            <th>
+                                Titel
+                            </th>
+                            <th>
+                                Vorname
+                            </th>
+                            <th>
+                                Nachname
+                            </th>
+                            <th>
+                                Geschlecht
+                            </th>
+                            <th>
+                                Briefanrede
+                            </th>
+                        </tr>
+                        <tr v-for="oneContact in allContacts">
+                            <td>
+                                {{ oneContact.address }}
+                            </td>
+                            <td>
+                                {{ oneContact.title }}
+                            </td>
+                            <td>
+                                {{ oneContact.firstName }}
+                            </td>
+                            <td>
+                                {{ oneContact.lastName }}
+                            </td>
+                            <td>
+                                {{ oneContact.gender }}
+                            </td>
+                            <td>
+                                {{ oneContact.salutation }}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div v-else>
+                Error
+            </div>
+        </div>
+        <script language="javascript" type="text/javascript" src="js/main.js"></script>
+    </main>
+    <footer>
+  </footer>
+</body>
+</html>
