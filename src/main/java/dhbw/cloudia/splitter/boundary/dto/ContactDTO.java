@@ -5,16 +5,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Data transfer object holding the outgoing parsed and split contact.
+ */
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContactDTO {
+public class ContactDTO implements DataTransferObject {
 
-    private String gender;
-    private String address;
+    private String letterSalutation;
     private String salutation;
     private String title;
+    private String gender;
     private String firstName;
     private String lastName;
 }

@@ -7,11 +7,12 @@ import lombok.NoArgsConstructor;
 
 /**
  * Error TO holding error message for end user
+ * Gets returned in exception handler
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ErrorDTO {
+public class ErrorDTO implements DataTransferObject {
     private String errorMessage;
 }

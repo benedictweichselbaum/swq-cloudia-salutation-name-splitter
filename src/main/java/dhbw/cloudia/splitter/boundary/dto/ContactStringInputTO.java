@@ -1,15 +1,15 @@
 package dhbw.cloudia.splitter.boundary.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Input DTO holding salutation string that gets parsed
+ */
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class StringContactInputDTO {
-
+public class ContactStringInputTO implements DataTransferObject {
     private String input;
 }

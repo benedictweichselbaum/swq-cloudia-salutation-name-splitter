@@ -1,6 +1,6 @@
 package dhbw.cloudia.splitter.control.exception;
 
-import dhbw.cloudia.splitter.boundary.dto.ContactOutputTO;
+import dhbw.cloudia.splitter.boundary.dto.ContactDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,5 +11,6 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class ContactParsingException extends RuntimeException {
-    private final ContactOutputTO partyParsedContactOutput;
+    private final ContactDTO partyParsedContactOutput;
+    private final String message;
 }
