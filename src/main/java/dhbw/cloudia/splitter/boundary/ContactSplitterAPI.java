@@ -2,6 +2,7 @@ package dhbw.cloudia.splitter.boundary;
 
 import dhbw.cloudia.splitter.boundary.dto.ContactDTO;
 import dhbw.cloudia.splitter.boundary.dto.ContactStringInputTO;
+import dhbw.cloudia.splitter.control.facade.ContactSalutationSplitterFacade;
 import dhbw.cloudia.splitter.control.service.ContactSplitterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +19,17 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ContactSplitterAPI {
 
-    private final ContactSplitterService contactSplitterService;
+    private final ContactSalutationSplitterFacade contactSalutationSplitterFacade;
 
     /**
      * API method receiving requests for splitting and parsing a contact.
-     * route: /contact-splitter
+     * route: /contact
      * HTTP-Method: POST
      * @param contactInput Input transfer object holding the contact string
      * @return parsed and split contact in output transfer object
      */
     @PostMapping
     public ResponseEntity<ContactDTO> splitContact(@RequestBody ContactStringInputTO contactInput){
-        return ResponseEntity.ok(this.contactSplitterService.parseContact(contactInput));
+        return ResponseEntity.ok(this.contactSalutationSplitterFacade.parseContactStringInput(contactInput));
     }
 }
