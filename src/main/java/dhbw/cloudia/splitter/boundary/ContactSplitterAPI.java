@@ -3,7 +3,6 @@ package dhbw.cloudia.splitter.boundary;
 import dhbw.cloudia.splitter.boundary.dto.ContactDTO;
 import dhbw.cloudia.splitter.boundary.dto.ContactStringInputTO;
 import dhbw.cloudia.splitter.control.facade.ContactSalutationSplitterFacade;
-import dhbw.cloudia.splitter.control.service.ContactSplitterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
