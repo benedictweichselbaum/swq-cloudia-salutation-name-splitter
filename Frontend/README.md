@@ -1,0 +1,1 @@
+# Frontend in Vue.js für den Kontaktsplitter
