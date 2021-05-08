@@ -48,11 +48,11 @@
                     <div class="halbelement output">
                         Anrede
                     </div>
-                    <input v-model="contact.address" type="text" class="halbelement output">
+                    <input v-model="contact.salutation" type="text" class="halbelement output">
                     <div class="halbelement output">
                         Standardisierte Briefanrede
                     </div>
-                    <input v-model="contact.salutation" type="text" class="halbelement output">
+                    <input v-model="contact.letterSalutation" type="text" class="halbelement output">
                     <div class="halbelement output">
                         Titel
                     </div>
@@ -102,7 +102,7 @@
                         </tr>
                         <tr v-for="oneContact in allContacts">
                             <td>
-                                {{ oneContact.address }}
+                                {{ oneContact.salutation }}
                             </td>
                             <td>
                                 {{ oneContact.title }}
@@ -117,7 +117,7 @@
                                 {{ oneContact.gender }}
                             </td>
                             <td>
-                                {{ oneContact.salutation }}
+                                {{ oneContact.letterSalutation }}
                             </td>
                         </tr>
                     </table>

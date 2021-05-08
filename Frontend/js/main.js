@@ -9,8 +9,8 @@ var app = new Vue({
             contactInput: "", // Hält die Eingabe
             contact: {
                 gender: "Männlich",
-                address: "Herr",
-                salutation: "Sehr geehrter Herr Dr. Aiwanger",
+                salutation: "Herr",
+                letterSalutation: "Sehr geehrter Herr Dr. Aiwanger",
                 title: "Dr.",
                 gender: "m",
                 firstName: "Hubert",
@@ -18,8 +18,8 @@ var app = new Vue({
             },
             emptyContact: {
                 gender: "",
-                address: "",
                 salutation: "",
+                letterSalutation: "",
                 title: "",
                 gender: "",
                 firstName: "",
