@@ -22,16 +22,16 @@ public class NameAndTitleAllocationService {
         for (ContactPartAllocation contactPartAllocation : contactPartAllocationList.stream().filter(this::isNameOrTitle).collect(Collectors.toList())) {
             switch (contactPartAllocation.getContactStringPart()) {
                 case FIRST_NAME:
-                    firstNameBuilder.append(SPACE).append(contactPartAllocation.getContactPart());
+                    firstNameBuilder.append(SPACE).append(contactPartAllocation.getContactPart().getSecondObject());
                     break;
                 case LAST_NAME:
-                    lastNameBuilder.append(LAST_NAME_SEPARATION).append(contactPartAllocation.getContactPart());
+                    lastNameBuilder.append(LAST_NAME_SEPARATION).append(contactPartAllocation.getContactPart().getSecondObject());
                     break;
                 case LAST_NAME_PREFIX:
-                    lastNameBuilder.insert(0, contactPartAllocation.getContactPart() + SPACE);
+                    lastNameBuilder.insert(0, contactPartAllocation.getContactPart().getSecondObject() + SPACE);
                     break;
                 case TITLE:
-                    titleBuilder.append(SPACE).append(contactPartAllocation.getContactPart());
+                    titleBuilder.append(SPACE).append(contactPartAllocation.getContactPart().getSecondObject());
                     break;
                 default:
                     throw new ContactParsingException(contactDTO, "Allocation error");

@@ -18,18 +18,18 @@ public class SalutationAllocationService {
     private static final Map<String, Tuple<String, String>> SALUTATION_ALLOCATION_MAP = new HashMap<>();
 
     static {
-        SALUTATION_ALLOCATION_MAP.put("Herr", new Tuple<>("M", "Sehr geehrter Herr "));
-        SALUTATION_ALLOCATION_MAP.put("Frau", new Tuple<>("F", "Sehr geehrte Frau "));
-        SALUTATION_ALLOCATION_MAP.put("Herrn", new Tuple<>("H", "Sehr geehrter Herr "));
-        SALUTATION_ALLOCATION_MAP.put("Mrs", new Tuple<>("F", "Dear Mrs "));
-        SALUTATION_ALLOCATION_MAP.put("Mr", new Tuple<>("M", "Dear Mr "));
-        SALUTATION_ALLOCATION_MAP.put("Ms", new Tuple<>("F", "Dear Ms "));
-        SALUTATION_ALLOCATION_MAP.put("Signora", new Tuple<>("F", "Gentile Signora "));
-        SALUTATION_ALLOCATION_MAP.put("Sig.", new Tuple<>("M", "Egregio Signor "));
-        SALUTATION_ALLOCATION_MAP.put("Mme", new Tuple<>("W", "Madame "));
-        SALUTATION_ALLOCATION_MAP.put("M", new Tuple<>("M", "Monsieur "));
-        SALUTATION_ALLOCATION_MAP.put("Señora", new Tuple<>("W", "Estimada Señora "));
-        SALUTATION_ALLOCATION_MAP.put("Señor", new Tuple<>("M", "Estimado Señor "));
+        SALUTATION_ALLOCATION_MAP.put("herr", new Tuple<>("M", "Sehr geehrter Herr "));
+        SALUTATION_ALLOCATION_MAP.put("frau", new Tuple<>("F", "Sehr geehrte Frau "));
+        SALUTATION_ALLOCATION_MAP.put("herrn", new Tuple<>("H", "Sehr geehrter Herr "));
+        SALUTATION_ALLOCATION_MAP.put("mrs", new Tuple<>("F", "Dear Mrs "));
+        SALUTATION_ALLOCATION_MAP.put("mr", new Tuple<>("M", "Dear Mr "));
+        SALUTATION_ALLOCATION_MAP.put("ms", new Tuple<>("F", "Dear Ms "));
+        SALUTATION_ALLOCATION_MAP.put("signora", new Tuple<>("F", "Gentile Signora "));
+        SALUTATION_ALLOCATION_MAP.put("sig.", new Tuple<>("M", "Egregio Signor "));
+        SALUTATION_ALLOCATION_MAP.put("mme", new Tuple<>("W", "Madame "));
+        SALUTATION_ALLOCATION_MAP.put("m", new Tuple<>("M", "Monsieur "));
+        SALUTATION_ALLOCATION_MAP.put("señora", new Tuple<>("W", "Estimada Señora "));
+        SALUTATION_ALLOCATION_MAP.put("señor", new Tuple<>("M", "Estimado Señor "));
         SALUTATION_ALLOCATION_MAP.put("", new Tuple<>("-", "Sehr geehrte Damen und Herren"));
     }
 
@@ -38,9 +38,9 @@ public class SalutationAllocationService {
                 .filter(part -> ContactStringPart.SALUTATION.equals(part.getContactStringPart()))
                 .collect(Collectors.toList());
         if (salutation.size() == 1) {
-            Tuple<String, String> sexAndSalutation = SALUTATION_ALLOCATION_MAP.get(salutation.get(0).getContactPart());
+            Tuple<String, String> sexAndSalutation = SALUTATION_ALLOCATION_MAP.get(salutation.get(0).getContactPart().getSecondObject().toLowerCase());
             contactDTO.setGender(sexAndSalutation.getFirstObject());
-            contactDTO.setSalutation(salutation.get(0).getContactPart());
+            contactDTO.setSalutation(salutation.get(0).getContactPart().getSecondObject());
             contactDTO.setLetterSalutation(sexAndSalutation.getSecondObject() + contactDTO.getTitle() + " " + contactDTO.getFirstName() + " " + contactDTO.getLastName());
         } else if (salutation.isEmpty()) {
             Tuple<String, String> sexAndSalutation = SALUTATION_ALLOCATION_MAP.get("");
