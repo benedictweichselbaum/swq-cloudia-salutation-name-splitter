@@ -87,7 +87,52 @@ var app = new Vue({
                 this.error = ""
             },
             // Sendet die an "contactInput" gebundene Telefonnummer an das Backend und schiebt diese in "phoneNumberOutput", welches diese anzeigt
-            checkContact: function (){
+            checkContact: async function (){
+                this.deletelog();
+                if(this.contactInput.length < 2)
+                {
+                    this.log("Die Eingabe ist zu kurz.", "error")
+                    return;
+                }
+                try {
+                    let response = await fetch("http://localhost:5000/hierkommtdasBackendrein", {
+                        body: JSON.stringify({contactString: this.contactInput}),
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        }
+                    });
+                
+                    if (response.ok) { // if HTTP-status is 200-299
+                        let json = await response.json();
+                        this.contact = json;
+                        this.contactSave;
+                        this.contactInput = "";
+                        this.log("Der Kontakt konnte erfolgreich erkannt werden. Manuelle Bearbeitungen können im rechten Teilfenster vorgenommen werden.","info")
+                    } else {
+                        switch (response.status) {
+                            case 400:
+                                this.log("Der Kontakt konnte nicht vollständig erkannt werden. Teilweise erkannte Felder sind eingetragen. Eine manuelle Fertigstellung ist notwendig. \n Eingabe:  <b>" + this.contactInput + "</b>", "info");
+                                this.contact = json;
+                                this.contactSave;
+                                this.contactInput = "";
+                                break;
+                            case 404:
+                                this.log("Konnte keine Verbindung zum Backend aufbauen. Der angefragte Pfad ist nicht verfügbar. Gegebenenfalls wird eine inkompatible Version genutzt.","error");
+                                break;
+                            case 500:
+                                this.log("Es ist ein interner Server-Fehler aufgetreten. \n Leider konnte die Anfrage nicht bearbeitet werden.","error");
+                                break;
+                            default:
+                                this.log("Es ist ein unbekannter Fehler aufgetreten. Der Fehlercode lautet " + response.status + ". \n Leider konnte die Anfrage nicht bearbeitet werden.","error"); 
+                        }
+                    }
+                } catch(e){
+                    this.log("Es konnte keine Verbindung zum Backend hergestellt werden. <br> Leider konnte die Anfrage nicht bearbeitet werden.","error");
+                }
+                
+            },
+            checkContactold: function (){
                 this.deletelog();
                 if(this.contactInput.length < 2)
                 {
@@ -95,7 +140,7 @@ var app = new Vue({
                     return;
                 }
                 fetch("http://localhost:5000/hierkommtdasBackendrein", {
-                    body: JSON.stringify({phoneNumberString: this.contactInput}),
+                    body: JSON.stringify({contactString: this.contactInput}),
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -104,7 +149,7 @@ var app = new Vue({
                     response.json().then(json =>{
                         console.log("Antwort empfangen: " + json)
                         phoneNumberOutput = json;
-                        // Eingabefeld für nächste Telefonnummer leeren
+                        // Eingabefeld für nächste Kontakteigabe leeren
                         this.contactInput = "";
                     } )}   );
             },

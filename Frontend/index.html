@@ -21,8 +21,8 @@
                 <div class="errorDivTitle">
                     Fehler
                 </div>
-                <div class="errorDivContent">
-                    {{ error }}
+                <div v-html="error" class="errorDivContent">
+                       
                 </div>
             </div>
             <div v-if="info != ''" class="infoDiv" v-bind:class="page">
@@ -30,7 +30,7 @@
                     Hinweis
                 </div>
                 <div class="infoDivContent">
-                    <p class="loginErrorP">{{ info }}</p>
+                    <p class="loginErrorP" v-html="info"></p>
                 </div>
             </div>
             <div class="start mainDiv" v-if="page == 'start'">
