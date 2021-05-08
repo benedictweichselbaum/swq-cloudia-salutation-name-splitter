@@ -50,10 +50,6 @@
                     </div>
                     <input v-model="contact.salutation" type="text" class="halbelement output">
                     <div class="halbelement output">
-                        Standardisierte Briefanrede
-                    </div>
-                    <input v-model="contact.letterSalutation" type="text" class="halbelement output">
-                    <div class="halbelement output">
                         Titel
                     </div>
                     <input v-model="contact.title" type="text" class="halbelement output">
@@ -69,6 +65,11 @@
                         Nachname
                     </div>
                     <input v-model="contact.lastName" type="text" class="halbelement output">
+
+                    <div class="halbelement output">
+                        Standardisierte Briefanrede
+                    </div>
+                    <input v-model="contact.letterSalutation" type="text" class="halbelement output">
 
                     <div v-on:click="discardChanges" class="halbelement output button">
                         {{ savePhrase[1] }}
