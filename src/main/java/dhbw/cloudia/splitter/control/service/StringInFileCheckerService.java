@@ -20,7 +20,8 @@ public class StringInFileCheckerService {
         File file = loadFile(filePath);
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
-                if (scanner.nextLine().equalsIgnoreCase(string.trim())) {
+                String nextLine = scanner.nextLine();
+                if (nextLine.equalsIgnoreCase(string.trim())) {
                     return true;
                 }
             }

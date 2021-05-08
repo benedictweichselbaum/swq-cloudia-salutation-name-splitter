@@ -7,6 +7,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ContactPartAllocation {
-    private String contactPart;
+    private Tuple<Integer, String> contactPart;
     private ContactStringPart contactStringPart;
 }
