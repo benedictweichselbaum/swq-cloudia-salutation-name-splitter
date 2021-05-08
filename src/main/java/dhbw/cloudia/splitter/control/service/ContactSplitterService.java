@@ -14,8 +14,10 @@ import java.util.stream.Collectors;
 public class ContactSplitterService {
 
     private static final String SEPARATION_CHARACTER = " ";
+    public static final String COMMA = ",";
 
     public List<String> splitContactString(ContactStringInputTO contactInput){
-        return Arrays.stream(contactInput.getInput().split(SEPARATION_CHARACTER)).collect(Collectors.toList());
+        return Arrays.stream(contactInput.getInput().split(SEPARATION_CHARACTER))
+                .map(part -> part.trim().replace(COMMA, "")).collect(Collectors.toList());
     }
 }

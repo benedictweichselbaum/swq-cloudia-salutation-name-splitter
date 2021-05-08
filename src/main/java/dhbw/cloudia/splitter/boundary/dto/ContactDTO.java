@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * Data transfer object holding the outgoing parsed and split contact.
  */
@@ -12,8 +14,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContactDTO implements DataTransferObject {
-
+public class ContactDTO implements DataTransferObject, Serializable {
+    private static final long serialVersionUID = 2405172041950251807L;
     private String letterSalutation;
     private String salutation;
     private String title;
