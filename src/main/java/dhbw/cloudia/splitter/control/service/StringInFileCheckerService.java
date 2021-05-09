@@ -7,6 +7,8 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -18,7 +20,10 @@ public class StringInFileCheckerService {
 
     public boolean stringIsInFile(String string, String filePath) {
         File file = loadFile(filePath);
-        try (Scanner scanner = new Scanner(file)) {
+        try {
+            FileReader fileReader = new FileReader(file);
+            int i = 0;
+            Scanner scanner = new Scanner(fileReader);
             while (scanner.hasNextLine()) {
                 String nextLine = scanner.nextLine();
                 if (nextLine.equalsIgnoreCase(string.trim())) {
@@ -26,7 +31,7 @@ public class StringInFileCheckerService {
                 }
             }
             return false;
-        } catch (IOException e) {
+        } catch (FileNotFoundException e){
             throw new FileReadingException(e.getMessage());
         }
     }

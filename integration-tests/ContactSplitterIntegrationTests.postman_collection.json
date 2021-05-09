@@ -72,7 +72,7 @@
 									"\r",
 									"\r",
 									"pm.test(\"Body is correct\", function () {\r",
-									"    pm.expect(pm.response.json()['letterSalutation']).to.equal(\"Sehr geehrter Herr Gutmensch\")\r",
+									"    pm.expect(pm.response.json()['letterSalutation']).to.equal(\"Sehr geehrter Herr Dr. Gutmensch\")\r",
 									"    pm.expect(pm.response.json()['salutation']).to.equal(\"Herr\")\r",
 									"    pm.expect(pm.response.json()['title']).to.equal(\"Dr.\")\r",
 									"    pm.expect(pm.response.json()['gender']).to.equal(\"M\")\r",
@@ -541,8 +541,6 @@
 											"pm.test(\"Nur der Nachname ist in der Briefanrede\", function () {\r",
 											"    pm.expect(pm.response.json()['letterSalutation']).to.equal(\"Sehr geehrte Frau von Leuthäuser-Schnarrenberger\")\r",
 											"    pm.expect(pm.response.json()['salutation']).to.equal(\"Frau\")\r",
-											"    pm.expect(pm.response.json()['title']).to.equal(\"\")\r",
-											"    pm.expect(pm.response.json()['gender']).to.equal(\"F\")\r",
 											"    pm.expect(pm.response.json()['firstName']).to.equal(\"Maria\")\r",
 											"    pm.expect(pm.response.json()['lastName']).to.equal(\"von Leuthäuser-Schnarrenberger\")\r",
 											"});"
@@ -590,12 +588,10 @@
 											"\r",
 											"\r",
 											"pm.test(\"Body is correct\", function () {\r",
-											"    pm.expect(pm.response.json()['letterSalutation']).to.equal(\"Sehr geehrte Frau Prof. Dr. von Leuthäuser-Schnarrenberger\")\r",
+											"    pm.expect(pm.response.json()['letterSalutation']).to.equal(\"Sehr geehrte Frau von Leuthäuser\")\r",
 											"    pm.expect(pm.response.json()['salutation']).to.equal(\"Frau\")\r",
-											"    pm.expect(pm.response.json()['title']).to.equal(\"Prof. Dr. rer. nat.\")\r",
-											"    pm.expect(pm.response.json()['gender']).to.equal(\"F\")\r",
 											"    pm.expect(pm.response.json()['firstName']).to.equal(\"Maria\")\r",
-											"    pm.expect(pm.response.json()['lastName']).to.equal(\"von Leuthäuser-Schnarrenberger\")\r",
+											"    pm.expect(pm.response.json()['lastName']).to.equal(\"von Leuthäuser\")\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -607,7 +603,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Frau Prof. Dr. rer. nat. Maria von Leuthäuser-Schnarrenberger\"\r\n}",
+									"raw": "{\r\n    \"input\": \"Frau Maria von Leuthäuser\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -689,11 +685,11 @@
 											"});\r",
 											"\r",
 											"\r",
-											"pm.test(\"Nur der Nachname ist in der Briefanrede\", function () {\r",
-											"    pm.expect(pm.response.json()['letterSalutation']).to.equal(\"Sehr geehrte Frau Berger\")\r",
+											"pm.test(\"Bindestrich konkateniert Nachnamen\", function () {\r",
+											"    pm.expect(pm.response.json()['letterSalutation']).to.equal(\"Sehr geehrte Frau Berger-Müller\")\r",
 											"    pm.expect(pm.response.json()['salutation']).to.equal(\"Frau\")\r",
 											"    pm.expect(pm.response.json()['firstName']).to.equal(\"Sandra\")\r",
-											"    pm.expect(pm.response.json()['lastName']).to.equal(\"Berger\")\r",
+											"    pm.expect(pm.response.json()['lastName']).to.equal(\"Berger-Müller\")\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -705,7 +701,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Frau Sandra Berger\"\r\n}",
+									"raw": "{\r\n    \"input\": \"Frau Sandra Berger-Müller\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -792,9 +788,9 @@
 											"});\r",
 											"\r",
 											"\r",
-											"pm.test(\"Body is correct\", function () {\r",
+											"pm.test(\"Zwei Doktortitel hintereinander werden erkannt\", function () {\r",
 											"    pm.expect(pm.response.json()['salutation']).to.equal(\"Herr\")\r",
-											"    pm.expect(pm.response.json()['title']).to.equal(\"Dr.\")\r",
+											"    pm.expect(pm.response.json()['title']).to.equal(\"Dr.-Ing.\")\r",
 											"    pm.expect(pm.response.json()['firstName']).to.equal(\"Sandro\")\r",
 											"    pm.expect(pm.response.json()['lastName']).to.equal(\"Gutmensch\")\r",
 											"});"
@@ -808,7 +804,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Herr Dr. Sandro Gutmensch\"\r\n}",
+									"raw": "{\r\n    \"input\": \"Herr Dr.-Ing. Sandro Gutmensch\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -891,10 +887,8 @@
 											"\r",
 											"\r",
 											"pm.test(\"Body is correct\", function () {\r",
-											"    pm.expect(pm.response.json()['letterSalutation']).to.equal(\"Sehr geehrte Herr Dr. Steffens\")\r",
 											"    pm.expect(pm.response.json()['salutation']).to.equal(\"Herr\")\r",
 											"    pm.expect(pm.response.json()['title']).to.equal(\"Dr.-Ing. Dr. rer. nat. Dr. h.c. mult.\")\r",
-											"    pm.expect(pm.response.json()['gender']).to.equal(\"H\")\r",
 											"    pm.expect(pm.response.json()['firstName']).to.equal(\"Paul\")\r",
 											"    pm.expect(pm.response.json()['lastName']).to.equal(\"Steffens\")\r",
 											"});"
@@ -1096,10 +1090,10 @@
 											"});\r",
 											"\r",
 											"\r",
-											"pm.test(\"Mme wird erkannt, Anrede wird angepasst\", function () {\r",
-											"    pm.expect(pm.response.json()['letterSalutation']).to.equal(\"Madame Noir\")\r",
-											"    pm.expect(pm.response.json()['salutation']).to.equal(\"Mme\")\r",
-											"    pm.expect(pm.response.json()['gender']).to.equal(\"W\")\r",
+											"pm.test(\"M wird erkannt, Anrede wird angepasst\", function () {\r",
+											"    pm.expect(pm.response.json()['letterSalutation']).to.equal(\"Monsieur Noir\")\r",
+											"    pm.expect(pm.response.json()['salutation']).to.equal(\"M\")\r",
+											"    pm.expect(pm.response.json()['gender']).to.equal(\"M\")\r",
 											"    pm.expect(pm.response.json()['firstName']).to.equal(\"Charlotte\")\r",
 											"    pm.expect(pm.response.json()['lastName']).to.equal(\"Noir\")\r",
 											"});"
@@ -1113,7 +1107,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Mme. Charlotte Noir\"\r\n}",
+									"raw": "{\r\n    \"input\": \"M. Charlotte Noir\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1196,10 +1190,10 @@
 											"});\r",
 											"\r",
 											"jsonData = pm.response.json()\r",
-											"pm.test(\"Body is correct\", function () {\r",
-											"    pm.expect(jsonData.letterSalutation).to.equal(\"Dear Mrs Faber\")\r",
-											"    pm.expect(jsonData['salutation']).to.eql(\"Mrs\")\r",
-											"    pm.expect(jsonData['gender']).to.equal(\"F\")\r",
+											"pm.test(\"Mr wird erkannt, Anrede wird angepasst Copy\", function () {\r",
+											"    pm.expect(jsonData.letterSalutation).to.equal(\"Dear Mr Faber\")\r",
+											"    pm.expect(jsonData['salutation']).to.eql(\"Mr\")\r",
+											"    pm.expect(jsonData['gender']).to.equal(\"M\")\r",
 											"    pm.expect(jsonData['firstName']).to.equal(\"Doreen\")\r",
 											"    pm.expect(jsonData['lastName']).to.equal(\"Faber\")\r",
 											"});"
@@ -1213,7 +1207,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Mrs. Doreen Faber\"\r\n}",
+									"raw": "{\r\n    \"input\": \"Mr. Doreen Faber\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1246,13 +1240,10 @@
 											"});\r",
 											"\r",
 											"\r",
-											"pm.test(\"Body is correct\", function () {\r",
+											"pm.test(\"Unbekanntes Geschlecht wird als Null eingetragen, Briefrede angepasst\", function () {\r",
 											"    pm.expect(pm.response.json()['letterSalutation']).to.equal(\"Sehr geehrte Damen und Herren\")\r",
 											"    pm.expect(pm.response.json()['salutation']).to.equal(null)\r",
-											"    pm.expect(pm.response.json()['title']).to.equal(\"\")\r",
 											"    pm.expect(pm.response.json()['gender']).to.equal(\"-\")\r",
-											"    pm.expect(pm.response.json()['firstName']).to.equal(\"Estobar\")\r",
-											"    pm.expect(pm.response.json()['lastName']).to.equal(\"y Gonzales\")\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1264,7 +1255,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Estobar y Gonzales\"\r\n}",
+									"raw": "{\r\n    \"input\": \"Max Meier\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1349,9 +1340,9 @@
 											"});\r",
 											"\r",
 											"\r",
-											"pm.test(\"Vorname und Nachname durch Leerzeichen getrennt werden erkannt\", function () {\r",
-											"    pm.expect(pm.response.json()['firstName']).to.equal(\"Sandra\")\r",
-											"    pm.expect(pm.response.json()['lastName']).to.equal(\"Berger\")\r",
+											"pm.test(\"Vorname und Nachname mit Nachnamen Prefix werden erkannt\", function () {\r",
+											"    pm.expect(pm.response.json()['firstName']).to.equal(\"Kevin\")\r",
+											"    pm.expect(pm.response.json()['lastName']).to.equal(\"von Berger\")\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1363,7 +1354,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Frau Sandra Berger\"\r\n}",
+									"raw": "{\r\n    \"input\": \"Frau Kevin von Berger\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1396,9 +1387,9 @@
 											"});\r",
 											"\r",
 											"\r",
-											"pm.test(\"Vorname und Nachname durch Leerzeichen getrennt werden erkannt\", function () {\r",
+											"pm.test(\"Vorname und Nachname durch Leerzeichen getrennt Doppelnachname mit Bindestrich werden erkannt\", function () {\r",
 											"    pm.expect(pm.response.json()['firstName']).to.equal(\"Sandra\")\r",
-											"    pm.expect(pm.response.json()['lastName']).to.equal(\"Berger\")\r",
+											"    pm.expect(pm.response.json()['lastName']).to.equal(\"Berger-Fischer\")\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1410,7 +1401,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Frau Sandra Berger\"\r\n}",
+									"raw": "{\r\n    \"input\": \"Frau Sandra Berger-Fischer\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
