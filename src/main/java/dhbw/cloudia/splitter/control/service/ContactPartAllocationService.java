@@ -28,6 +28,7 @@ public class ContactPartAllocationService {
 
     public List<ContactPartAllocation> allocateContactParts(List<Tuple<Integer, String>> contactParts) {
         List<ContactPartAllocation> contactPartAllocationList = new ArrayList<>();
+        int initialContactPartsSize = contactParts.size();
         FILES.forEach(tuple -> {
             List<Tuple<Integer, String>> partsToRemove = new ArrayList<>();
             for (Tuple<Integer, String> currentTuple : contactParts) {
@@ -44,7 +45,7 @@ public class ContactPartAllocationService {
                     }
                     partsToRemove.add(currentTuple);
                 } else if (this.stringInFileCheckerService.stringIsInFile(contactPart, tuple.getFirstObject())) {
-                    if (currentTuple.getFirstObject()-1 != contactParts.size() && ContactStringPart.LAST_NAME.equals(tuple.getSecondObject())) {
+                    if (currentTuple.getFirstObject() != initialContactPartsSize-1 && ContactStringPart.LAST_NAME.equals(tuple.getSecondObject())) {
                         contactPartAllocationList.add(new ContactPartAllocation(new Tuple<>(currentTuple.getFirstObject(), contactPart), ContactStringPart.FIRST_NAME));
                     } else {
                         contactPartAllocationList.add(new ContactPartAllocation(new Tuple<>(currentTuple.getFirstObject(), contactPart), tuple.getSecondObject()));

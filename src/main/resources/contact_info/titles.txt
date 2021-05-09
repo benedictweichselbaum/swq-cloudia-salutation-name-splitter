@@ -922,3 +922,11 @@ Dipl.-oec.-troph. (FH)
 M. Eval.
 Dipl.-Wirt.-Ing. (FH)
 Dipl.-Wirt.-Übers. (FH)
+Prof. Dr. rer. nat.
+Prof. Dr. ing.
+Professor
+Prof. Dr. phil.
+Prof. Dr. hc.
+Prof. Dr. mult. hc.
+Prof. Dr. med.
+Prof. Dr. dent.
