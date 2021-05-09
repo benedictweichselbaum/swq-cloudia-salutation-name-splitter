@@ -33,7 +33,7 @@ public class SalutationAllocationService {
         SALUTATION_ALLOCATION_MAP.put("", new Tuple<>("-", "Sehr geehrte Damen und Herren"));
     }
 
-    public void setSexAndLetterSalutation(List<ContactPartAllocation> contactPartAllocationList, ContactDTO contactDTO) {
+    public ContactDTO setSexAndLetterSalutation(List<ContactPartAllocation> contactPartAllocationList, ContactDTO contactDTO) {
         List<ContactPartAllocation> salutation = contactPartAllocationList.stream()
                 .filter(part -> ContactStringPart.SALUTATION.equals(part.getContactStringPart()))
                 .collect(Collectors.toList());
@@ -41,13 +41,15 @@ public class SalutationAllocationService {
             Tuple<String, String> sexAndSalutation = SALUTATION_ALLOCATION_MAP.get(salutation.get(0).getContactPart().getSecondObject().toLowerCase());
             contactDTO.setGender(sexAndSalutation.getFirstObject());
             contactDTO.setSalutation(salutation.get(0).getContactPart().getSecondObject());
-            contactDTO.setLetterSalutation(sexAndSalutation.getSecondObject() + contactDTO.getTitle() + " " + contactDTO.getFirstName() + " " + contactDTO.getLastName());
+            contactDTO.setLetterSalutation(sexAndSalutation.getSecondObject() + contactDTO.getTitle() + " " + contactDTO.getLastName());
             contactDTO.setLetterSalutation(contactDTO.getLetterSalutation().replaceAll("\\s{2,}", " ").trim());
+            return contactDTO;
         } else if (salutation.isEmpty()) {
             Tuple<String, String> sexAndSalutation = SALUTATION_ALLOCATION_MAP.get("");
             contactDTO.setGender(sexAndSalutation.getFirstObject());
             contactDTO.setLetterSalutation(sexAndSalutation.getSecondObject());
             contactDTO.setLetterSalutation(contactDTO.getLetterSalutation().replaceAll("\\s{2,}", " ").trim());
+            return contactDTO;
         } else {
             throw new ContactParsingException(contactDTO, "Too many salutations");
         }

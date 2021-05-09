@@ -46,9 +46,8 @@ public class ContactSalutationSplitterFacade {
 
         List<ContactPartAllocation> contactPartAllocationList = this.contactPartAllocationService.allocateContactParts(splitContact);
         contactPartAllocationList = this.allocationOptimizationService.optimizeAllocation(contactPartAllocationList);
-        this.nameAndTitleAllocationService.setNameAndTitle(contactPartAllocationList, contactDTO);
-        this.salutationAllocationService.setSexAndLetterSalutation(contactPartAllocationList, contactDTO);
-
+        contactDTO = this.nameAndTitleAllocationService.setNameAndTitle(contactPartAllocationList, contactDTO);
+        contactDTO = this.salutationAllocationService.setSexAndLetterSalutation(contactPartAllocationList, contactDTO);
         return contactDTO;
     }
 }

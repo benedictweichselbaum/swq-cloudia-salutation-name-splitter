@@ -15,7 +15,7 @@ public class NameAndTitleAllocationService {
     public static final String SPACE = " ";
     public static final String LAST_NAME_SEPARATION = "-";
 
-    public void setNameAndTitle(List<ContactPartAllocation> contactPartAllocationList, ContactDTO contactDTO) {
+    public ContactDTO setNameAndTitle(List<ContactPartAllocation> contactPartAllocationList, ContactDTO contactDTO) {
         StringBuilder titleBuilder = new StringBuilder();
         StringBuilder firstNameBuilder = new StringBuilder();
         StringBuilder lastNameBuilder = new StringBuilder();
@@ -40,6 +40,7 @@ public class NameAndTitleAllocationService {
         contactDTO.setFirstName(firstNameBuilder.toString().trim());
         contactDTO.setLastName(transformLastName(lastNameBuilder.toString()));
         contactDTO.setTitle(titleBuilder.toString().trim());
+        return contactDTO;
     }
 
     private String transformLastName(String lastName) {
