@@ -8,6 +8,7 @@ import dhbw.cloudia.splitter.control.service.AllocationOptimizationService;
 import dhbw.cloudia.splitter.control.service.ContactPartAllocationService;
 import dhbw.cloudia.splitter.control.service.ContactSplitterService;
 import dhbw.cloudia.splitter.control.service.NameAndTitleAllocationService;
+import dhbw.cloudia.splitter.control.service.NotAllocatedHandlerService;
 import dhbw.cloudia.splitter.control.service.OnlyOneContactPartService;
 import dhbw.cloudia.splitter.control.service.SalutationAllocationService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,7 @@ public class ContactSalutationSplitterFacade {
     private final SalutationAllocationService salutationAllocationService;
     private final OnlyOneContactPartService onlyOneContactPartService;
     private final AllocationOptimizationService allocationOptimizationService;
+    private final NotAllocatedHandlerService notAllocatedHandlerService;
 
     /**
      * Central workflow method for splitting the contact (salutation)
@@ -48,6 +50,7 @@ public class ContactSalutationSplitterFacade {
         contactPartAllocationList = this.allocationOptimizationService.optimizeAllocation(contactPartAllocationList);
         this.nameAndTitleAllocationService.setNameAndTitle(contactPartAllocationList, contactDTO);
         this.salutationAllocationService.setSexAndLetterSalutation(contactPartAllocationList, contactDTO);
+        this.notAllocatedHandlerService.handleNotAllocatedParts(contactPartAllocationList, contactDTO);
 
         return contactDTO;
     }

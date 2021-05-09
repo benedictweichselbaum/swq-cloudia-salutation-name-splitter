@@ -44,7 +44,11 @@ public class ContactPartAllocationService {
                     }
                     partsToRemove.add(currentTuple);
                 } else if (this.stringInFileCheckerService.stringIsInFile(contactPart, tuple.getFirstObject())) {
-                    contactPartAllocationList.add(new ContactPartAllocation(new Tuple<>(currentTuple.getFirstObject(), contactPart), tuple.getSecondObject()));
+                    if (currentTuple.getFirstObject()-1 != contactParts.size() && ContactStringPart.LAST_NAME.equals(tuple.getSecondObject())) {
+                        contactPartAllocationList.add(new ContactPartAllocation(new Tuple<>(currentTuple.getFirstObject(), contactPart), ContactStringPart.FIRST_NAME));
+                    } else {
+                        contactPartAllocationList.add(new ContactPartAllocation(new Tuple<>(currentTuple.getFirstObject(), contactPart), tuple.getSecondObject()));
+                    }
                     partsToRemove.add(currentTuple);
                 }
             }

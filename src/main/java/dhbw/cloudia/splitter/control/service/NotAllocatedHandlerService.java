@@ -17,7 +17,7 @@ public class NotAllocatedHandlerService {
                 ContactStringPart.NOT_ALLOCATED.equals(part.getContactStringPart())).collect(Collectors.toList());
         if (notAllocatedParts.size() == 1 && contactDTO.getLastName().isEmpty()) {
             contactDTO.setLastName(contactPartAllocationList.get(0).getContactPart().getSecondObject());
-        } else {
+        } else if (contactDTO.getLastName().isBlank() || contactDTO.getLastName().isEmpty()) {
             throw new ContactParsingException(contactDTO, "Not all contact parts could be allocated");
         }
     }
