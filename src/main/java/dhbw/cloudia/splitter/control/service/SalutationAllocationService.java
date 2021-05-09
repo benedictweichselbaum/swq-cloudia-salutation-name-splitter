@@ -42,10 +42,12 @@ public class SalutationAllocationService {
             contactDTO.setGender(sexAndSalutation.getFirstObject());
             contactDTO.setSalutation(salutation.get(0).getContactPart().getSecondObject());
             contactDTO.setLetterSalutation(sexAndSalutation.getSecondObject() + contactDTO.getTitle() + " " + contactDTO.getFirstName() + " " + contactDTO.getLastName());
+            contactDTO.setLetterSalutation(contactDTO.getLetterSalutation().replaceAll("\\s{2,}", " ").trim());
         } else if (salutation.isEmpty()) {
             Tuple<String, String> sexAndSalutation = SALUTATION_ALLOCATION_MAP.get("");
             contactDTO.setGender(sexAndSalutation.getFirstObject());
             contactDTO.setLetterSalutation(sexAndSalutation.getSecondObject());
+            contactDTO.setLetterSalutation(contactDTO.getLetterSalutation().replaceAll("\\s{2,}", " ").trim());
         } else {
             throw new ContactParsingException(contactDTO, "Too many salutations");
         }
