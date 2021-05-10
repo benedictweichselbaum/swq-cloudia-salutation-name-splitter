@@ -22,9 +22,9 @@ public class ContactPartAllocationService {
     private static final List<Tuple<String, ContactParts>> FILES = Arrays.asList(
         new Tuple<>("/contact_info/titles.txt", ContactParts.TITLE),
         new Tuple<>("/contact_info/salutations.txt", ContactParts.SALUTATION),
+        new Tuple<>("/contact_info/last_name_prefix.txt", ContactParts.LAST_NAME_PREFIX),
         new Tuple<>("/contact_info/german_last_names.txt", ContactParts.LAST_NAME),
-        new Tuple<>("/contact_info/german_first_names.txt", ContactParts.FIRST_NAME),
-        new Tuple<>("/contact_info/last_name_prefix.txt", ContactParts.LAST_NAME_PREFIX)
+        new Tuple<>("/contact_info/german_first_names.txt", ContactParts.FIRST_NAME)
     );
 
     private final StringInFileCheckerService stringInFileCheckerService;
@@ -39,15 +39,15 @@ public class ContactPartAllocationService {
         List<ContactPartAllocation> contactPartAllocationList = new ArrayList<>();
         int initialContactPartsSize = contactParts.size();
 
-        FILES.forEach(tuple -> {
+        FILES.forEach(fileTuple -> {
             List<Tuple<Integer, String>> partsToRemove = new ArrayList<>();
-            for (Tuple<Integer, String> currentTuple : contactParts) {
-                String contactPart = getStringFromTupleAndCheckForSalutation(tuple, currentTuple);
+            for (Tuple<Integer, String> currentContactTuple : contactParts) {
+                String contactPart = getStringFromTupleAndCheckForSalutation(fileTuple, currentContactTuple);
 
                 if (contactPart.contains("-")) {
-                    handleDashSeparatedContactParts(contactPartAllocationList, tuple, partsToRemove, currentTuple, contactPart);
-                } else if (this.stringInFileCheckerService.stringIsInFile(contactPart, tuple.getFirstObject())) {
-                    handleAllocationMatch(contactPartAllocationList, initialContactPartsSize, tuple, partsToRemove, currentTuple, contactPart);
+                    handleDashSeparatedContactParts(contactPartAllocationList, fileTuple, partsToRemove, currentContactTuple, contactPart);
+                } else if (this.stringInFileCheckerService.stringIsInFile(contactPart, fileTuple.getFirstObject())) {
+                    handleAllocationMatch(contactPartAllocationList, initialContactPartsSize, fileTuple, partsToRemove, currentContactTuple, contactPart, contactParts);
                 }
             }
 
@@ -63,20 +63,34 @@ public class ContactPartAllocationService {
 
     private void handleAllocationMatch(List<ContactPartAllocation> contactPartAllocationList,
                                        int initialContactPartsSize,
-                                       Tuple<String, ContactParts> tuple,
+                                       Tuple<String, ContactParts> fileTuple,
                                        List<Tuple<Integer, String>> partsToRemove,
-                                       Tuple<Integer, String> currentTuple,
-                                       String contactPart) {
-        if (currentTuple.getFirstObject() != initialContactPartsSize -1 && ContactParts.LAST_NAME.equals(tuple.getSecondObject())) {
+                                       Tuple<Integer, String> currentContactTuple,
+                                       String contactPart,
+                                       List<Tuple<Integer, String>> contactParts) {
+        if (ContactParts.LAST_NAME_PREFIX.equals(fileTuple.getSecondObject())) {
+            contactParts.stream().filter(part -> part.getFirstObject() >= currentContactTuple.getFirstObject()).forEachOrdered(
+                    tuple -> {
+                        // is a prefix
+                        if (this.stringInFileCheckerService.stringIsInFile(tuple.getSecondObject(), FILES.get(2).getFirstObject())) {
+                            contactPartAllocationList.add(new ContactPartAllocation(tuple, ContactParts.LAST_NAME_PREFIX));
+                        } else {
+                            contactPartAllocationList.add(new ContactPartAllocation(tuple, ContactParts.LAST_NAME));
+                        }
+                        partsToRemove.add(tuple);
+                    }
+            );
+        } else if (currentContactTuple.getFirstObject() != initialContactPartsSize -1 && ContactParts.LAST_NAME.equals(fileTuple.getSecondObject())) {
             if (this.stringInFileCheckerService.stringIsInFile(contactPart, FILES.get(4).getFirstObject())) {
-                contactPartAllocationList.add(new ContactPartAllocation(new Tuple<>(currentTuple.getFirstObject(), contactPart), ContactParts.LAST_NAME_PREFIX));
+                contactPartAllocationList.add(new ContactPartAllocation(new Tuple<>(currentContactTuple.getFirstObject(), contactPart), ContactParts.LAST_NAME_PREFIX));
             } else {
-                contactPartAllocationList.add(new ContactPartAllocation(new Tuple<>(currentTuple.getFirstObject(), contactPart), ContactParts.FIRST_NAME));
+                contactPartAllocationList.add(new ContactPartAllocation(new Tuple<>(currentContactTuple.getFirstObject(), contactPart), ContactParts.FIRST_NAME));
             }
+            partsToRemove.add(currentContactTuple);
         } else {
-            contactPartAllocationList.add(new ContactPartAllocation(new Tuple<>(currentTuple.getFirstObject(), contactPart), tuple.getSecondObject()));
+            contactPartAllocationList.add(new ContactPartAllocation(new Tuple<>(currentContactTuple.getFirstObject(), contactPart), fileTuple.getSecondObject()));
+            partsToRemove.add(currentContactTuple);
         }
-        partsToRemove.add(currentTuple);
     }
 
     private String getStringFromTupleAndCheckForSalutation(Tuple<String, ContactParts> tuple, Tuple<Integer, String> currentTuple) {
