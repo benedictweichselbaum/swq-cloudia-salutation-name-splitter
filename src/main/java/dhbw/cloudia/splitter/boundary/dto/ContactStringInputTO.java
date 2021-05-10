@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ContactStringInputTO implements DataTransferObject {
-    private String input;
+public class ContactStringInputTO {
+    private String contactString;
 }

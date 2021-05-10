@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ErrorDTO implements DataTransferObject {
+public class ErrorDTO {
     private String errorMessage;
 }

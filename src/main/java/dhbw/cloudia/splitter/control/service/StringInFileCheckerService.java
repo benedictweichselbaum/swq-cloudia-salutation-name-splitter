@@ -1,29 +1,26 @@
 package dhbw.cloudia.splitter.control.service;
 
-import dhbw.cloudia.splitter.control.exception.FileReadingException;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
+import java.io.InputStream;
 import java.util.Scanner;
 
+/**
+ * Service class checking if string is a line in file
+ */
 @Service
-@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class StringInFileCheckerService {
 
-    private final ResourceLoader resourceLoader;
-
+    /**
+     * Method determining if a string is in file. File gets split at a new line.
+     * @param string string on which the comparison takes place
+     * @param filePath file path
+     * @return true if string is in file, else false
+     */
     public boolean stringIsInFile(String string, String filePath) {
-        File file = loadFile(filePath);
-        try {
-            FileReader fileReader = new FileReader(file);
-            int i = 0;
-            Scanner scanner = new Scanner(fileReader);
+        try (Scanner scanner = new Scanner(loadInputStream(filePath))){
             while (scanner.hasNextLine()) {
                 String nextLine = scanner.nextLine();
                 if (nextLine.equalsIgnoreCase(string.trim())) {
@@ -31,16 +28,11 @@ public class StringInFileCheckerService {
                 }
             }
             return false;
-        } catch (FileNotFoundException e){
-            throw new FileReadingException(e.getMessage());
         }
     }
 
-    private File loadFile(String filePath) {
-        try {
-            return this.resourceLoader.getResource(filePath).getFile();
-        } catch (IOException e) {
-            throw new FileReadingException(e.getMessage());
-        }
+    private InputStream loadInputStream(String filePath) {
+        filePath = filePath.replace("/", File.separator);
+        return this.getClass().getClassLoader().getResourceAsStream(filePath);
     }
 }

@@ -1,6 +1,12 @@
 van
 von
-Freiherr von
+Freiherr
 de
-van de
-von de
+zu
+Erzherzog
+Großherzog
+Herzog
+Landgraf
+Fürst
+Graf
+Baron

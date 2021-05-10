@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContactDTO implements DataTransferObject, Serializable {
+public class ContactDTO implements Serializable {
     private static final long serialVersionUID = 2405172041950251807L;
     private String letterSalutation;
     private String salutation;

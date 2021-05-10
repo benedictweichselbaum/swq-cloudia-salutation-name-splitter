@@ -1,6 +1,6 @@
 package dhbw.cloudia.splitter.boundary.handler;
 
-import dhbw.cloudia.splitter.boundary.dto.DataTransferObject;
+import dhbw.cloudia.splitter.boundary.dto.ContactDTO;
 import dhbw.cloudia.splitter.boundary.dto.ErrorDTO;
 import dhbw.cloudia.splitter.control.exception.ContactParsingException;
 import dhbw.cloudia.splitter.control.exception.FileReadingException;
@@ -15,16 +15,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class SplitterExceptionHandler {
 
     /**
-     * Method that handles ContactParsingException. If Exception has output object it get returned.
-     * Otherwise the answer body is empty.
+     * Method that handles ContactParsingException. Exception has output object that gets returned.
      * @param contactParsingException handled exception
      * @return HTTP-Status 400 with partial contact output if available
      */
     @ExceptionHandler(ContactParsingException.class)
-    public ResponseEntity<DataTransferObject> handleContactParseError(ContactParsingException contactParsingException) {
-        return contactParsingException.getPartyParsedContactOutput() == null ?
-                ResponseEntity.badRequest().body(ErrorDTO.builder().errorMessage(contactParsingException.getMessage()).build()) :
-                ResponseEntity.badRequest().body(contactParsingException.getPartyParsedContactOutput());
+    public ResponseEntity<ContactDTO> handleContactParseError(ContactParsingException contactParsingException) {
+        return ResponseEntity.badRequest().body(contactParsingException.getPartyParsedContactOutput());
     }
 
     /**

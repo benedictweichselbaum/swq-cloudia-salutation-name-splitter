@@ -95,7 +95,7 @@ var app = new Vue({
                     return;
                 }
                 try {
-                    let response = await fetch("http://localhost:5000/hierkommtdasBackendrein", {
+                    let response = await fetch("http://localhost:5000/contact", {
                         body: JSON.stringify({contactString: this.contactInput}),
                         method: "POST",
                         headers: {
@@ -139,7 +139,7 @@ var app = new Vue({
                     this.log("Die Eingabe ist zu kurz", "error")
                     return;
                 }
-                fetch("http://localhost:5000/hierkommtdasBackendrein", {
+                fetch("http://localhost:5000/contact", {
                     body: JSON.stringify({contactString: this.contactInput}),
                     method: "POST",
                     headers: {

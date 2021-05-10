@@ -1,6 +1,9 @@
 package dhbw.cloudia.splitter.control.contactstringpart;
 
-public enum ContactStringPart {
+/**
+ * Enumeration holding the possible string contact allocations
+ */
+public enum ContactParts {
     TITLE,
     FIRST_NAME,
     LAST_NAME_PREFIX,
