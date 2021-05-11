@@ -2,19 +2,16 @@ var app = new Vue({
     el: '#app',
     data:
         {
-            page: "start", // Startseite
-            pageHistory: [], // Speichert die Seitenhistorie, um zurücknavigieren zu können
             error: "",
             info: "",
             contactInput: "", // Hält die Eingabe
             contact: {
-                gender: "Männlich",
-                salutation: "Herr",
-                letterSalutation: "Sehr geehrter Herr Dr. Aiwanger",
-                title: "Dr.",
-                gender: "m",
-                firstName: "Hubert",
-                lastName: "Aiwanger"
+                gender: "",
+                salutation: "",
+                letterSalutation: "",
+                title: "",
+                firstName: "",
+                lastName: ""
             },
             emptyContact: {
                 gender: "",
@@ -25,13 +22,13 @@ var app = new Vue({
                 firstName: "",
                 lastName: ""
             },
-            contactSave: {
-
-            },
+            contactSave: {},
             allContacts: [],
         },
 	computed: {
+        // Bestimmt welche Texte auf den Knöpfen angezeigt werden
         savePhrase: function() {
+            // Verweise müssen über JSON ausgetauscht werden, da ansonsten nur der Verweis übergeben wird
             if (JSON.stringify(this.contact) === JSON.stringify(this.emptyContact)) {
                 if(JSON.stringify(this.contactSave) === JSON.stringify(this.emptyContact))
                 {
@@ -54,24 +51,7 @@ var app = new Vue({
     },
     methods:
         {
-            switchPage: function (page) {
-                this.error = "";
-                this.info = "";
-                this.pageHistory.push(this.page);
-                this.page = page
-            },
-            goBack: function(){
-                if(this.pageHistory.length > 0)
-                {
-                    if (this.page === "game") {
-                        this.exitsession();
-                    }
-                    this.error = "";
-                    this.info = "";
-                    this.page = this.pageHistory[this.pageHistory.length - 1];
-                    this.pageHistory.pop()
-                }
-            },
+            // Zeigt den Hinweistext an (info: Hinweis | error: Fehlermeldung)
             log: function (log, logType){
                 this.info = ""
                 this.error = ""
@@ -82,11 +62,12 @@ var app = new Vue({
                     this.info = log
                 }
             },
+            // Um den Hinweistext (sowohl Hinweis als auch Fehler) auszublenden
             deletelog: function () {
                 this.info = ""
                 this.error = ""
             },
-            // Sendet die an "contactInput" gebundene Telefonnummer an das Backend und schiebt diese in "phoneNumberOutput", welches diese anzeigt
+            // Sendet den an "contactInput" gebundenen Kontakt an das Backend und schiebt diese in "phoneNumberOutput", welches diese anzeigt
             checkContact: async function (){
                 this.deletelog();
                 if(this.contactInput.length < 2)
@@ -103,7 +84,7 @@ var app = new Vue({
                         }
                     });
                 
-                    if (response.ok) { // if HTTP-status is 200-299
+                    if (response.ok) { // wenn der HTTP-Status 200-299 ist (aktuell kommt nur 200)
                         let json = await response.json();
                         this.contact = json;
                         this.contactSave;
@@ -132,27 +113,7 @@ var app = new Vue({
                 }
                 
             },
-            checkContactold: function (){
-                this.deletelog();
-                if(this.contactInput.length < 2)
-                {
-                    this.log("Die Eingabe ist zu kurz", "error")
-                    return;
-                }
-                fetch("http://localhost:5000/contact", {
-                    body: JSON.stringify({contactString: this.contactInput}),
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    }
-                }).then(response =>{
-                    response.json().then(json =>{
-                        console.log("Antwort empfangen: " + json)
-                        phoneNumberOutput = json;
-                        // Eingabefeld für nächste Kontakteigabe leeren
-                        this.contactInput = "";
-                    } )}   );
-            },
+            // Setzt die durch den Nutzer vorgenommenen Änderungen zurück
             discardChanges: function() {
                 this.deletelog();
                 if(JSON.stringify(this.contact) === JSON.stringify(this.contactSave))
@@ -162,6 +123,7 @@ var app = new Vue({
                     this.contact = JSON.parse(JSON.stringify(this.contactSave)) 
                 }
             },
+            // Speichert die Änderungen ab und überträgt den Kontakt in die Liste der fertigen Kontakte. Setzt danach die Eingabefelder und den zur Wiederherstellung gesicherte Version zurück
             applyChanges: function(){
                 this.deletelog();
                 if (JSON.stringify(this.contact) === JSON.stringify(this.emptyContact)) 
@@ -172,7 +134,18 @@ var app = new Vue({
                     this.contact = JSON.parse(JSON.stringify(this.emptyContact));
                     this.contactSave = JSON.parse(JSON.stringify(this.emptyContact)) 
                 }
+            },
+            // Test, der die Eingabefelder füllt (also eine erfolgreiche Anfrage an das Backend simuliert) {Kann mit app.exampleContact() in der Konsole aufgerufen werden.}
+            exampleContact: function() {
+                this.contact = {
+                    gender: "Männlich",
+                    salutation: "Herr",
+                    letterSalutation: "Sehr geehrter Herr Dr. Aiwanger",
+                    title: "Dr.",
+                    firstName: "Hubert",
+                    lastName: "Aiwanger"
+                };
+                this.emptyContact = JSON.parse(JSON.stringify(this.emptyContact));
             }
-            
         },
 });
