@@ -39,7 +39,7 @@ public class ContactPartAllocationService {
         List<ContactPartAllocation> contactPartAllocationList = new ArrayList<>();
         int initialContactPartsSize = contactParts.size();
 
-        FILES.forEach(fileTuple -> {
+        for (Tuple<String, ContactParts> fileTuple : FILES) {
             List<Tuple<Integer, String>> partsToRemove = new ArrayList<>();
             for (Tuple<Integer, String> currentContactTuple : contactParts) {
                 String contactPart = getStringFromTupleAndCheckForSalutation(fileTuple, currentContactTuple);
@@ -53,8 +53,7 @@ public class ContactPartAllocationService {
 
             // remove parts if they are allocated
             contactParts.removeAll(partsToRemove);
-        });
-
+        }
         // Mark not allocated parts
         contactParts.forEach(part -> contactPartAllocationList.add(new ContactPartAllocation(part, ContactParts.NOT_ALLOCATED)));
 
@@ -68,7 +67,9 @@ public class ContactPartAllocationService {
                                        Tuple<Integer, String> currentContactTuple,
                                        String contactPart,
                                        List<Tuple<Integer, String>> contactParts) {
-        if (ContactParts.LAST_NAME_PREFIX.equals(fileTuple.getSecondObject())) {
+        if (ContactParts.LAST_NAME_PREFIX.equals(fileTuple.getSecondObject()) && partsToRemove.contains(currentContactTuple)) {
+            return;
+        } else if (ContactParts.LAST_NAME_PREFIX.equals(fileTuple.getSecondObject())) {
             contactParts.stream().filter(part -> part.getFirstObject() >= currentContactTuple.getFirstObject()).forEachOrdered(
                     tuple -> {
                         // is a prefix
