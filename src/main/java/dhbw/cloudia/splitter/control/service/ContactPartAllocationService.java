@@ -39,14 +39,16 @@ public class ContactPartAllocationService {
         List<ContactPartAllocation> contactPartAllocationList = new ArrayList<>();
         int initialContactPartsSize = contactParts.size();
 
+        // iterate over files
         for (Tuple<String, ContactParts> fileTuple : FILES) {
             List<Tuple<Integer, String>> partsToRemove = new ArrayList<>();
+            // iterate over contact parts
             for (Tuple<Integer, String> currentContactTuple : contactParts) {
                 String contactPart = getStringFromTupleAndCheckForSalutation(fileTuple, currentContactTuple);
 
-                if (contactPart.contains("-")) {
+                if (contactPart.contains("-")) { // special case for contact parts that are separated by a dash
                     handleDashSeparatedContactParts(contactPartAllocationList, fileTuple, partsToRemove, currentContactTuple, contactPart);
-                } else if (this.stringInFileCheckerService.stringIsInFile(contactPart, fileTuple.getFirstObject())) {
+                } else if (this.stringInFileCheckerService.stringIsInFile(contactPart, fileTuple.getFirstObject())) { // case if contact part is part of a file
                     handleAllocationMatch(contactPartAllocationList, initialContactPartsSize, fileTuple, partsToRemove, currentContactTuple, contactPart, contactParts);
                 }
             }
@@ -67,8 +69,12 @@ public class ContactPartAllocationService {
                                        Tuple<Integer, String> currentContactTuple,
                                        String contactPart,
                                        List<Tuple<Integer, String>> contactParts) {
+
+        // fix to prevent a ConcurrentModificationException
         if (ContactParts.LAST_NAME_PREFIX.equals(fileTuple.getSecondObject()) && partsToRemove.contains(currentContactTuple)) {
             return;
+
+        // if a last name prefix is found everything after it is also a prefix or the last name itself.
         } else if (ContactParts.LAST_NAME_PREFIX.equals(fileTuple.getSecondObject())) {
             contactParts.stream().filter(part -> part.getFirstObject() >= currentContactTuple.getFirstObject()).forEachOrdered(
                     tuple -> {
@@ -81,13 +87,17 @@ public class ContactPartAllocationService {
                         partsToRemove.add(tuple);
                     }
             );
-        } else if (currentContactTuple.getFirstObject() != initialContactPartsSize -1 && ContactParts.LAST_NAME.equals(fileTuple.getSecondObject())) {
+
+        // if something seems to be a last name but it is not in the last position its either a last name prefix or a first name
+        } else if (currentContactTuple.getFirstObject() != initialContactPartsSize - 1 && ContactParts.LAST_NAME.equals(fileTuple.getSecondObject())) {
             if (this.stringInFileCheckerService.stringIsInFile(contactPart, FILES.get(4).getFirstObject())) {
                 contactPartAllocationList.add(new ContactPartAllocation(new Tuple<>(currentContactTuple.getFirstObject(), contactPart), ContactParts.LAST_NAME_PREFIX));
             } else {
                 contactPartAllocationList.add(new ContactPartAllocation(new Tuple<>(currentContactTuple.getFirstObject(), contactPart), ContactParts.FIRST_NAME));
             }
             partsToRemove.add(currentContactTuple);
+
+        // normal allocation according to current file that is being checked
         } else {
             contactPartAllocationList.add(new ContactPartAllocation(new Tuple<>(currentContactTuple.getFirstObject(), contactPart), fileTuple.getSecondObject()));
             partsToRemove.add(currentContactTuple);
@@ -97,9 +107,11 @@ public class ContactPartAllocationService {
     private String getStringFromTupleAndCheckForSalutation(Tuple<String, ContactParts> tuple, Tuple<Integer, String> currentTuple) {
         String contactPart = currentTuple.getSecondObject();
 
+        // if salutation has a dot in it, ignore it
         if (ContactParts.SALUTATION.equals(tuple.getSecondObject())) {
             contactPart = contactPart.replace(".", "");
         }
+
         return contactPart;
     }
 
@@ -108,6 +120,8 @@ public class ContactPartAllocationService {
                                                  List<Tuple<Integer, String>> partsToRemove, 
                                                  Tuple<Integer, String> currentTuple, 
                                                  String contactPart) {
+
+        // Dash separated contact parts are either titles or last names if they do not contain a dot.
         if (ContactParts.TITLE.equals(tuple.getSecondObject()) && this.stringInFileCheckerService.stringIsInFile(contactPart, tuple.getFirstObject())) {
             contactPartAllocationList.add(new ContactPartAllocation(new Tuple<>(currentTuple.getFirstObject(), contactPart), ContactParts.TITLE));
         } else if (!contactPart.contains(".")) {

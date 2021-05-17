@@ -17,7 +17,7 @@ public class ContactSplitterService {
     public static final String COMMA = ",";
 
     /**
-     * Method spliting the incoming string at spaces determining the single contact parts that
+     * Method splitting the incoming string at spaces determining the single contact parts that
      * need to be allocated
      * @param contactInput input object coming from the client
      * @return contact part tuples containing string and position in string (as index starting at 0)

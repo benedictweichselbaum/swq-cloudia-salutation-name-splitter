@@ -114,7 +114,6 @@ Hermann
 Lindner
 Kern
 Wenzel
-Paul
 Kruse
 Nagel
 Barth
@@ -3808,7 +3807,6 @@ Knoblich
 Löber
 Strahl
 Englisch
-Max
 Saal
 Schmahl
 Haimerl
