@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 /**
@@ -34,7 +35,7 @@ public class StringInFileCheckerService {
 
         try (Scanner scanner = new Scanner(loadInputStream(filePath))){
             while (scanner.hasNextLine()) {
-                String nextLine = scanner.nextLine();
+                String nextLine = new String(scanner.nextLine().getBytes(), StandardCharsets.UTF_8);
                 if (nextLine.equalsIgnoreCase(string.trim())) {
                     return true;
                 }
