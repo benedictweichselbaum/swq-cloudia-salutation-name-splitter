@@ -10,11 +10,11 @@
 	</parent>
 	<groupId>dhbw.cloudia</groupId>
 	<artifactId>salutaion-name-splitter</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>salutaion-name-splitter</name>
 	<description>Final project for the software quality course DHBW Horb (TINF2018)</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

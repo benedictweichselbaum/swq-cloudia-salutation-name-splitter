@@ -20,11 +20,11 @@ public class ContactPartAllocationService {
 
     // Do not change order
     private static final List<Tuple<String, ContactParts>> FILES = Arrays.asList(
-        new Tuple<>("/contact_info/titles.txt", ContactParts.TITLE),
-        new Tuple<>("/contact_info/salutations.txt", ContactParts.SALUTATION),
-        new Tuple<>("/contact_info/last_name_prefix.txt", ContactParts.LAST_NAME_PREFIX),
-        new Tuple<>("/contact_info/german_last_names.txt", ContactParts.LAST_NAME),
-        new Tuple<>("/contact_info/german_first_names.txt", ContactParts.FIRST_NAME)
+        new Tuple<>("contact_info/titles.txt", ContactParts.TITLE),
+        new Tuple<>("contact_info/salutations.txt", ContactParts.SALUTATION),
+        new Tuple<>("contact_info/last_name_prefix.txt", ContactParts.LAST_NAME_PREFIX),
+        new Tuple<>("contact_info/german_last_names.txt", ContactParts.LAST_NAME),
+        new Tuple<>("contact_info/german_first_names.txt", ContactParts.FIRST_NAME)
     );
 
     private final StringInFileCheckerService stringInFileCheckerService;
