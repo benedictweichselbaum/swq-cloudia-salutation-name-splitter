@@ -48,6 +48,8 @@ public class ContactPartAllocationService {
 
                 if (contactPart.contains("-")) { // special case for contact parts that are separated by a dash
                     handleDashSeparatedContactParts(contactPartAllocationList, fileTuple, partsToRemove, currentContactTuple, contactPart);
+                } else if (contactPart.contains(",")) {
+                    handleContactPartWithComma(contactPartAllocationList, partsToRemove, currentContactTuple, contactPart);
                 } else if (this.stringInFileCheckerService.stringIsInFile(contactPart, fileTuple.getFirstObject())) { // case if contact part is part of a file
                     handleAllocationMatch(contactPartAllocationList, initialContactPartsSize, fileTuple, partsToRemove, currentContactTuple, contactPart, contactParts);
                 }
@@ -129,5 +131,18 @@ public class ContactPartAllocationService {
                     contactPartAllocationList.add(new ContactPartAllocation(new Tuple<>(currentTuple.getFirstObject(), lastName), ContactParts.LAST_NAME)));
         }
         partsToRemove.add(currentTuple);
+    }
+
+    private void handleContactPartWithComma(
+            List<ContactPartAllocation> contactPartAllocationList,
+            List<Tuple<Integer, String>> partsToRemove,
+            Tuple<Integer, String> currentTuple,
+            String contactPart
+    ) {
+        if (this.stringInFileCheckerService.stringIsInFile(contactPart.replace(",", ""), FILES.get(3).getFirstObject())) {
+            contactPartAllocationList.add(new ContactPartAllocation(new Tuple<>(currentTuple.getFirstObject(),
+                    currentTuple.getSecondObject().replace(",", "")), ContactParts.LAST_NAME));
+            partsToRemove.add(currentTuple);
+        }
     }
 }

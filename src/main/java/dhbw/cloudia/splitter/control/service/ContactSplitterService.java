@@ -26,7 +26,7 @@ public class ContactSplitterService {
         List<Tuple<Integer, String>> splitContact = new ArrayList<>();
         int index = 0;
         for (String s : contactInput.getContactString().split(SEPARATION_CHARACTER)) {
-            splitContact.add(new Tuple<>(index, s.replace(COMMA, "")));
+            splitContact.add(new Tuple<>(index, s));
             index++;
         }
         return splitContact;
