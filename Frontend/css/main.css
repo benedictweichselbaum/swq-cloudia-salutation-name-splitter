@@ -39,7 +39,6 @@ h2{
 	padding: 1%;
 	height: 350px;
     margin: 0.5%;
-   /* box-sizing: border-box; */
 }
 
 .halbelement{
@@ -90,6 +89,8 @@ h2{
     background-color: #635f5f;
     padding: 10px;
 }
+
+/* Kontaktfeld unten */
 
 .allContacts {
     float: left;

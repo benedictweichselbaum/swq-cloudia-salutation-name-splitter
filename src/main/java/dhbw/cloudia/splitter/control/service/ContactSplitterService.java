@@ -14,7 +14,6 @@ import java.util.List;
 public class ContactSplitterService {
 
     private static final String SEPARATION_CHARACTER = "[ ]+";
-    public static final String COMMA = ",";
 
     /**
      * Method splitting the incoming string at spaces determining the single contact parts that
