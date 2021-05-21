@@ -2,10 +2,10 @@ var app = new Vue({
     el: '#app',
     data:
         {
-            error: "",
-            info: "",
+            error: "", // Feld für Fehlermeldung
+            info: "", // Feld für Hinweismeldung
             contactInput: "", // Hält die Eingabe
-            contact: {
+            contact: { 
                 gender: "",
                 salutation: "",
                 letterSalutation: "",
@@ -23,23 +23,24 @@ var app = new Vue({
                 lastName: ""
             },
             contactSave: {},
-            allContacts: [],
-            titleInput: "",
+            allContacts: [], // Liste mit allen hinzugefügten Kontakten
+            titleInput: "", // Hält die Eingabe des zu lernenden Titels
         },
 	computed: {
         // Bestimmt welche Texte auf den Knöpfen angezeigt werden
         savePhrase: function() {
-            // Verweise müssen über JSON ausgetauscht werden, da ansonsten nur der Verweis übergeben wird
+            // Objekte müssen über JSON ausgetauscht werden, da ansonsten nur der Verweis übergeben wird
             if (JSON.stringify(this.contact) === JSON.stringify(this.emptyContact)) {
-                if(JSON.stringify(this.contactSave) === JSON.stringify(this.emptyContact))
+                if(JSON.stringify(this.contactSave) === JSON.stringify(this.emptyContact)) // Eingabefelder komplett leer und nichts zum Wiederherstellen
                 {
                     return ["Speichern nicht möglich", "Leere Eingabe"]
                 }
+                // Eingabefelder komplett leer aber Kontakt zum Wiederherstellen
                 return ["Leere Eingabe", "Wiederherstellen"]
-            } else if (JSON.stringify(this.contact) === JSON.stringify(this.contactSave))
+            } else if (JSON.stringify(this.contact) === JSON.stringify(this.contactSave)) // Ergebnis vom Backend vorliegend, keine manuelle Änderung vorgenommen
             {
                 return ["Speichern","Eingabe leeren"]
-            } else if(JSON.stringify(this.contactSave) === JSON.stringify(this.emptyContact))
+            } else if(JSON.stringify(this.contactSave) === JSON.stringify(this.emptyContact)) // Ergebnis vom Backend vorliegend, manuelle Änderung vorgenommen
             {
                 return ["Manuellen Eintrag speichern", "Eingabe verwerfen"]
             } else {
@@ -91,19 +92,19 @@ var app = new Vue({
                         this.contactSave;
                         this.contactInput = "";
                         this.log("Der Kontakt konnte erfolgreich erkannt werden. Manuelle Bearbeitungen können im rechten Teilfenster vorgenommen werden.","info")
-                    } else {
+                    } else { // Wenn Anfrage nicht oder nur teilweise erfolgreich
                         switch (response.status) {
-                            case 400:
+                            case 400: // Teilweise Erkennung
                                 let json = await response.json();
                                 this.log("Der Kontakt konnte nicht vollständig erkannt werden. Teilweise erkannte Felder sind eingetragen. Eine manuelle Fertigstellung ist notwendig. \n Eingabe:  <b>" + this.contactInput + "</b>", "info");
                                 this.contact = json;
                                 this.contactSave;
                                 this.contactInput = "";
                                 break;
-                            case 404:
+                            case 404: // Falsche Route (aufgrund von anderer Backend-Version)
                                 this.log("Konnte keine Verbindung zum Backend aufbauen. Der angefragte Pfad ist nicht verfügbar. Gegebenenfalls wird eine inkompatible Version genutzt.","error");
                                 break;
-                            case 500:
+                            case 500: // Interner Server-Fehler
                                 this.log("Es ist ein interner Server-Fehler aufgetreten. \n Leider konnte die Anfrage nicht bearbeitet werden.","error");
                                 break;
                             default:
@@ -111,6 +112,7 @@ var app = new Vue({
                         }
                     }
                 } catch(e){
+                    // z.B. bei Timeout
                     this.log("Es konnte keine Verbindung zum Backend hergestellt werden. <br> Leider konnte die Anfrage nicht bearbeitet werden.","error");
                 }
                 
@@ -160,6 +162,7 @@ var app = new Vue({
                             this.log("Der Titel wurde nicht gelernt.","error");
                         }
                     } catch(e){
+                        // z.B. bei Timeout
                         this.log("Es konnte keine Verbindung zum Backend hergestellt werden. <br> Leider konnte die Anfrage nicht bearbeitet werden.","error");
                     }
                 }
@@ -174,7 +177,7 @@ var app = new Vue({
                     firstName: "Hubert",
                     lastName: "Aiwanger"
                 };
-                this.emptyContact = JSON.parse(JSON.stringify(this.emptyContact));
+                this.contactSave = JSON.parse(JSON.stringify(this.contact));
             }
         },
 });
