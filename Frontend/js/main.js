@@ -93,6 +93,7 @@ var app = new Vue({
                     } else {
                         switch (response.status) {
                             case 400:
+                                let json = await response.json();
                                 this.log("Der Kontakt konnte nicht vollständig erkannt werden. Teilweise erkannte Felder sind eingetragen. Eine manuelle Fertigstellung ist notwendig. \n Eingabe:  <b>" + this.contactInput + "</b>", "info");
                                 this.contact = json;
                                 this.contactSave;
