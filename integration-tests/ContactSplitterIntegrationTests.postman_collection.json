@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0a5eef2c-2697-4fd7-a671-df662ac458e8",
+		"_postman_id": "7711ea77-0ae3-4946-a03b-60837a887ab3",
 		"name": "ContactSplitterIntegrationTests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -38,7 +38,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"input\": \"Frau Sandra Berger\"\r\n}",
+							"raw": "{\r\n    \"contactString\": \"Frau Sandra Berger\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -89,7 +89,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"input\": \"Herr Dr. Sandro Gutmensch\"\r\n}",
+							"raw": "{\r\n    \"contactString\": \"Herr Dr. Sandro Gutmensch\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -140,7 +140,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"input\": \"Professor Heinreich Freiherr vom Wald\"\r\n}",
+							"raw": "{\r\n    \"contactString\": \"Professor Heinreich Freiherr vom Wald\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -191,7 +191,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"input\": \"Mrs. Doreen Faber\"\r\n}",
+							"raw": "{\r\n    \"contactString\": \"Mrs. Doreen Faber\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -242,7 +242,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"input\": \"Mme. Charlotte Noir\"\r\n}",
+							"raw": "{\r\n    \"contactString\": \"Mme. Charlotte Noir\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -293,7 +293,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"input\": \"Estobar y Gonzales\"\r\n}",
+							"raw": "{\r\n    \"contactString\": \"Estobar y Gonzales\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -344,7 +344,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"input\": \"Frau Prof. Dr. rer. nat. Maria von Leuthäuser-Schnarrenberger\"\r\n}",
+							"raw": "{\r\n    \"contactString\": \"Frau Prof. Dr. rer. nat. Maria von Leuthäuser-Schnarrenberger\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -395,7 +395,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"input\": \"Herr Dipl. Ing. Max von Müller\"\r\n}",
+							"raw": "{\r\n    \"contactString\": \"Herr Dipl. Ing. Max von Müller\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -446,7 +446,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"input\": \"Dr. Russwurm, Winfried\"\r\n}",
+							"raw": "{\r\n    \"contactString\": \"Dr. Russwurm, Winfried\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -497,7 +497,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"input\": \"Herr Dr.-Ing. Dr. rer. nat. Dr. h.c. mult. Paul Steffens\"\r\n}",
+							"raw": "{\r\n    \"contactString\": \"Herr Dr.-Ing. Dr. rer. nat. Dr. h.c. mult. Paul Steffens\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -554,7 +554,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Frau Maria von Leuthäuser-Schnarrenberger\"\r\n}",
+									"raw": "{\r\n    \"contactString\": \"Frau Maria von Leuthäuser-Schnarrenberger\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -603,7 +603,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Frau Maria von Leuthäuser\"\r\n}",
+									"raw": "{\r\n    \"contactString\": \"Frau Maria von Leuthäuser\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -652,7 +652,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Frau Sandra Berger\"\r\n}",
+									"raw": "{\r\n    \"contactString\": \"Frau Sandra Berger\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -701,7 +701,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Frau Sandra Berger-Müller\"\r\n}",
+									"raw": "{\r\n    \"contactString\": \"Frau Sandra Berger-Müller\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -755,7 +755,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Herr Dr. Sandro Gutmensch\"\r\n}",
+									"raw": "{\r\n    \"contactString\": \"Herr Dr. Sandro Gutmensch\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -804,7 +804,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Herr Dr.-Ing. Sandro Gutmensch\"\r\n}",
+									"raw": "{\r\n    \"contactString\": \"Herr Dr.-Ing. Sandro Gutmensch\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -853,7 +853,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Herr Dr. Dr. Sandro Gutmensch\"\r\n}",
+									"raw": "{\r\n    \"contactString\": \"Herr Dr. Dr. Sandro Gutmensch\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -902,7 +902,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Herr Dr.-Ing. Dr. rer. nat. Dr. h.c. mult. Paul Steffens\"\r\n}",
+									"raw": "{\r\n    \"contactString\": \"Herr Dr.-Ing. Dr. rer. nat. Dr. h.c. mult. Paul Steffens\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -957,7 +957,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Frau Sandra Berger\"\r\n}",
+									"raw": "{\r\n    \"contactString\": \"Frau Sandra Berger\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1007,7 +1007,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Herr Sandra Berger\"\r\n}",
+									"raw": "{\r\n    \"contactString\": \"Herr Sandra Berger\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1057,7 +1057,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Mme. Charlotte Noir\"\r\n}",
+									"raw": "{\r\n    \"contactString\": \"Mme. Charlotte Noir\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1107,7 +1107,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"M. Charlotte Noir\"\r\n}",
+									"raw": "{\r\n    \"contactString\": \"M. Charlotte Noir\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1157,7 +1157,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Mrs. Doreen Faber\"\r\n}",
+									"raw": "{\r\n    \"contactString\": \"Mrs. Doreen Faber\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1207,7 +1207,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Mr. Doreen Faber\"\r\n}",
+									"raw": "{\r\n    \"contactString\": \"Mr. Doreen Faber\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1255,7 +1255,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Max Meier\"\r\n}",
+									"raw": "{\r\n    \"contactString\": \"Max Meier\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1307,7 +1307,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Frau Sandra Berger\"\r\n}",
+									"raw": "{\r\n    \"contactString\": \"Frau Sandra Berger\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1354,7 +1354,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Frau Kevin von Berger\"\r\n}",
+									"raw": "{\r\n    \"contactString\": \"Frau Kevin von Berger\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1401,7 +1401,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Frau Sandra Berger-Fischer\"\r\n}",
+									"raw": "{\r\n    \"contactString\": \"Frau Sandra Berger-Fischer\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1448,7 +1448,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"input\": \"Frau Sandra von Berger-Fischer\"\r\n}",
+									"raw": "{\r\n    \"contactString\": \"Frau Sandra von Berger-Fischer\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
