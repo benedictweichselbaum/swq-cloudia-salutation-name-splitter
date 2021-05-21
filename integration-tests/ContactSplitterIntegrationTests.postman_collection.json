@@ -1470,6 +1470,58 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Titelverbesserung",
+					"item": [
+						{
+							"name": "Vorname und Nachname durch Leerzeichen getrennt werden erkannt Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Vorname und Nachname durch Leerzeichen getrennt werden erkannt\", function () {\r",
+											"    pm.expect(pm.response.json()['firstName']).to.equal(\"Sandra\")\r",
+											"    pm.expect(pm.response.json()['lastName']).to.equal(\"Berger\")\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"contactString\": \"Frau Sandra Berger\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/contact",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"contact"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}
