@@ -13,7 +13,7 @@ var app = new Vue({
                 firstName: "",
                 lastName: ""
             },
-            emptyContact: {
+            emptyContact: { // Leerer Kontakt, um den Kontakt zurückzusetzen
                 gender: "",
                 salutation: "",
                 letterSalutation: "",
@@ -25,7 +25,6 @@ var app = new Vue({
             contactSave: {},
             allContacts: [],
             titleInput: "",
-            show: true,
         },
 	computed: {
         // Bestimmt welche Texte auf den Knöpfen angezeigt werden
@@ -138,6 +137,7 @@ var app = new Vue({
                     this.contactSave = JSON.parse(JSON.stringify(this.emptyContact)) 
                 }
             },
+            // Um einen neuen Titel zu lernen wird 
             sendTitle: async function(){
                 if(this.titleInput.lenght < 2)
                 {
