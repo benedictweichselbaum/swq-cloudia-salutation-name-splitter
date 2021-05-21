@@ -25,6 +25,7 @@ var app = new Vue({
             contactSave: {},
             allContacts: [],
             titleInput: "",
+            show: true,
         },
 	computed: {
         // Bestimmt welche Texte auf den Knöpfen angezeigt werden
