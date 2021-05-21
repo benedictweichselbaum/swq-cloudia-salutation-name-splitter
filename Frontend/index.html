@@ -3,15 +3,15 @@
 <head>
     <title>Kontakt</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
-    
-    <script language="javascript" type="text/javascript" src="js/vuedev.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />   
+    <script language="javascript" type="text/javascript" src="js/vue.min.js"></script>
 </head>
 <body>
     <header>
     </header>
     <main>
         <div id ="app">
+            <!-- Fehlermeldung -->
             <div v-if="error != ''" class="errorDiv">
                 <div class="errorDivTitle">
                     Fehler
@@ -20,6 +20,7 @@
                        
                 </div>
             </div>
+            <!-- Hinweismeldung -->
             <div v-if="info != ''" class="infoDiv">
                 <div class="infoDivTitle">
                     Hinweis
@@ -28,7 +29,9 @@
                     <p class="loginErrorP" v-html="info"></p>
                 </div>
             </div>
+            <!-- Hauptanzeige -->
             <div class="start mainDiv">
+                <!-- Linkes Fenster: Eingabe Kontakt und Titel lernen -->
                 <div class="startbox input">
                     <h2>Kontakt eingeben</h2>
                     <input v-model="contactInput" type="text" class="ganzelement inputElement">
@@ -46,6 +49,7 @@
                         Titel lernen
                     </div>
                 </div>
+                <!-- Rechtes Fenster: Aufgeteilter Kontakt -->
                 <div class="startbox output">
                     <h2> Kontakt </h2>
                     <div class="halbelement output">
@@ -81,6 +85,7 @@
                         {{ savePhrase[0] }}
                     </div>
                 </div>
+                <!-- Kontaktliste (wird nur angezeigt, wenn mindestens ein Kontakt abgespeichert ist) -->
                 <div v-if="allContacts.length > 0" class="allContacts">
                     <h2>Kontaktliste</h2>
                     <table class="allContactsTable">
