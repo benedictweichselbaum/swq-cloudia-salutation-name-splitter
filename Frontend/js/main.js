@@ -24,6 +24,7 @@ var app = new Vue({
             },
             contactSave: {},
             allContacts: [],
+            titleInput: "",
         },
 	computed: {
         // Bestimmt welche Texte auf den Knöpfen angezeigt werden
@@ -134,6 +135,32 @@ var app = new Vue({
                     this.allContacts.push(this.contact);
                     this.contact = JSON.parse(JSON.stringify(this.emptyContact));
                     this.contactSave = JSON.parse(JSON.stringify(this.emptyContact)) 
+                }
+            },
+            sendTitle: async function(){
+                if(this.titleInput.lenght < 2)
+                {
+                    this.log("Der Titel ist zu kurz zum anlernen.", "error");
+                } else {
+                    this.deletelog();
+                    try {
+                        let response = await fetch("http://localhost:5000/title-learning", {
+                            body: JSON.stringify({newTitle: this.titleInput}),
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            }
+                        });
+                    
+                        if (response.ok) { // wenn der HTTP-Status 200-299 ist (aktuell kommt nur 200)
+                            this.log("Der Titel wurde gelernt. In zukünftigen Anfragen wird dieser erkannt.","info");
+                            this.titleInput = "";
+                        } else {
+                            this.log("Der Titel wurde nicht gelernt.","error");
+                        }
+                    } catch(e){
+                        this.log("Es konnte keine Verbindung zum Backend hergestellt werden. <br> Leider konnte die Anfrage nicht bearbeitet werden.","error");
+                    }
                 }
             },
             // Test, der die Eingabefelder füllt (also eine erfolgreiche Anfrage an das Backend simuliert) {Kann mit app.exampleContact() in der Konsole aufgerufen werden.}
